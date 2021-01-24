@@ -1,9 +1,9 @@
 package com.androiddevs.firebasenotifications
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val TOPIC = "/topics/myTopic2"
 
@@ -18,24 +20,35 @@ class MainActivity : AppCompatActivity() {
 
     val TAG = "MainActivity"
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             FirebaseService.token = it.token
             etToken.setText(it.token)
+
+            val sdf = SimpleDateFormat("yyyy:MM:dd-HH:mm:ss")
+            val currentDateandTime = sdf.format(Date())
+            etMessage.setText(currentDateandTime)
+
         }
+
+
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         btnSend.setOnClickListener {
             val title = etTitle.text.toString()
+
             val message = etMessage.text.toString()
             val recipientToken = etToken.text.toString()
             if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
-                        NotificationData(title, message),
-                        recipientToken
+                    NotificationData(title, message),
+                    recipientToken
                 ).also {
                     sendNotification(it)
                 }
@@ -51,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Log.e(TAG, response.errorBody().toString())
             }
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
     }
