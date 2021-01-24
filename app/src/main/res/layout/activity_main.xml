@@ -25,13 +25,13 @@
         android:layout_marginTop="18dp"
         android:layout_marginBottom="60dp"
         android:ems="10"
-        android:hint="Timestamp"
-        android:inputType="textPersonName"
+        android:inputType="datetime"
         app:layout_constraintBottom_toTopOf="@+id/etToken"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/etTitle"
+        tools:text="@tools:sample/date/hhmmss" />
 
     <EditText
         android:id="@+id/etToken"
@@ -58,8 +58,10 @@
         android:ems="10"
         android:hint="Baby Crying"
         android:inputType="textPersonName"
+        android:text="Baby Crying"
         app:layout_constraintBottom_toTopOf="@+id/etMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Baby Crying" />
 </androidx.constraintlayout.widget.ConstraintLayout>
