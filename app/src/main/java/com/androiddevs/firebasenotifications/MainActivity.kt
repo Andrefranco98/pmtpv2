@@ -1,11 +1,16 @@
 package com.androiddevs.firebasenotifications
 
 import android.content.Context
+import android.content.Intent
+import android.media.MediaPlayer
+import android.media.RingtoneManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -19,14 +24,19 @@ import java.util.*
 const val TOPIC = "/topics/myTopic2"
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
 
     val TAG = "MainActivity"
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        auth = FirebaseAuth.getInstance()
+
+
 
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
@@ -55,7 +65,16 @@ class MainActivity : AppCompatActivity() {
                     sendNotification(it)
                 }
             }
+            ringtone()
         }
+
+            btnLogout.setOnClickListener {
+            auth.signOut()
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
+
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,4 +96,14 @@ class MainActivity : AppCompatActivity() {
             Log.e(TAG, e.toString())
         }
     }
+
+    private fun ringtone(){
+        try{
+            val track: MediaPlayer? = MediaPlayer.create(applicationContext, R.raw.baby)
+            track?.start()
+        } catch(e: Exception){
+            Toast.makeText(applicationContext,"Failed to play the ringtone!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
