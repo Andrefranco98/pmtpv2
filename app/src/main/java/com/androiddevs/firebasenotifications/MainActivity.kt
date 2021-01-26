@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -104,6 +105,11 @@ class MainActivity : AppCompatActivity() {
         } catch(e: Exception){
             Toast.makeText(applicationContext,"Failed to play the ringtone!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun homepagescreen(view: View) {
+        startActivity(Intent(this, HomePageActivity::class.java))
+        finish()
     }
 
 }
