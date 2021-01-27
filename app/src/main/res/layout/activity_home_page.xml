@@ -9,31 +9,34 @@
 
 
     <ImageView
-        android:layout_width="264dp"
-        android:layout_height="187dp"
+        android:id="@+id/imagem"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="clip_horizontal|center|clip_vertical|start|center_horizontal|end"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginTop="43dp"
         android:layout_marginEnd="88dp"
+        android:layout_marginBottom="50dp"
         android:contentDescription="@string/baby_chilling"
         android:src="@drawable/babychill" />
 
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="287dp"
-        android:layout_height="190dp"
-
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="282dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="354dp"
         android:fontFamily="@font/allerta"
         android:text="@string/baby_sleeping"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -46,12 +49,45 @@
         android:id="@+id/notifscreen"
         android:layout_width="111dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="33dp"
         android:background="#FFFFFF"
         android:onClick="notifscreenbtn"
         android:text="@string/notification" />
+
+    <ListView
+
+        android:id="@+id/listView"
+        android:layout_width="392dp"
+        android:layout_height="161dp"
+        android:layout_alignBottom="@id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="-259dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listView"
+        android:layout_alignTop="@id/listView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-38dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/allerta"
+        android:text="@string/WakeTime"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#E91E63"
+        android:textColorHint="#FFFFFF"
+        android:textSize="25sp" />
 
 </RelativeLayout>

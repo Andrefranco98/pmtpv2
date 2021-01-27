@@ -17,5 +17,6 @@
     <string name="notification">Notification</string>
     <string name="baby_chilling">baby chilling</string>
     <string name="ok">OK !</string>
+    <string name="WakeTime">Wake Times: </string>
 
 </resources>
