@@ -3,7 +3,6 @@ package com.androiddevs.firebasenotifications
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.media.RingtoneManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -12,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -27,7 +27,9 @@ const val TOPIC = "/topics/myTopic2"
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
+
     val TAG = "MainActivity"
+
 
 
 
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         auth = FirebaseAuth.getInstance()
+
+
 
 
 
@@ -50,6 +54,18 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        fun saveHero(){
+            val sdf = SimpleDateFormat("yyyy:MM:dd-HH:mm:ss")
+            val currentDateandTime = sdf.format(Date())
+            val ref = FirebaseDatabase.getInstance().getReference(("Sleeps"))
+            val heroId = ref.push().key
+
+            val hero = Hero (heroId, currentDateandTime)
+            if (heroId != null) {
+                ref.child(heroId).setValue(hero)
+            }
+        }
+
 
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
@@ -57,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             val title = etTitle.text.toString()
             val message = etMessage.text.toString()
             val recipientToken = etToken.text.toString()
+            saveHero()
             if(title.isNotEmpty() && message.isNotEmpty() && recipientToken.isNotEmpty()) {
                 PushNotification(
                     NotificationData(title, message),
@@ -97,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun ringtone(){
+     private fun ringtone(){
         try{
             val track: MediaPlayer? = MediaPlayer.create(applicationContext, R.raw.baby)
             track?.start()
