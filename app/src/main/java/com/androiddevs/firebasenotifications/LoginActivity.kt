@@ -70,10 +70,10 @@ class LoginActivity : AppCompatActivity() {
 
         if (currentUser != null) {
             if(currentUser.isEmailVerified) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, HomePageActivity::class.java))
                 finish()
             }else{
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, HomePageActivity::class.java))
                 finish()
             }
         } else {

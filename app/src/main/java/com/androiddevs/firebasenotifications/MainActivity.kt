@@ -5,8 +5,6 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 const val TOPIC = "/topics/myTopic2"
 
@@ -39,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         auth = FirebaseAuth.getInstance()
 
-
-
-
-
         FirebaseService.sharedPref = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             FirebaseService.token = it.token
@@ -60,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             val ref = FirebaseDatabase.getInstance().getReference(("Sleeps"))
             val heroId = ref.push().key
 
-            val hero = Hero (heroId, currentDateandTime)
+            val hero = Hero(heroId, currentDateandTime)
             if (heroId != null) {
                 ref.child(heroId).setValue(hero)
             }
@@ -94,11 +89,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
 
     private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
@@ -118,8 +108,8 @@ class MainActivity : AppCompatActivity() {
         try{
             val track: MediaPlayer? = MediaPlayer.create(applicationContext, R.raw.baby)
             track?.start()
-        } catch(e: Exception){
-            Toast.makeText(applicationContext,"Failed to play the ringtone!", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception){
+            Toast.makeText(applicationContext, "Failed to play the ringtone!", Toast.LENGTH_SHORT).show()
         }
     }
 
